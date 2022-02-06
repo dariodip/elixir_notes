@@ -1,0 +1,101 @@
+<!-- vim: set syntax=markdown: -->
+<!-- livebook:{"autosave_interval_s":null,"persist_outputs":true} -->
+
+# First Notebook
+
+## Getting started with Livebook
+
+
+This is my first notebook using Livebook. I'm very excited to try it.
+
+It seems to be a very powerful tool and I have a lot of ideas to develop with.
+
+<!-- livebook:{"break_markdown":true} -->
+
+As the first step, let's greet the world as usual:
+
+```elixir
+IO.puts("Hello, world from Livebook")
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+Hello, world from Livebook
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+:ok
+```
+
+Cool! It works.
+
+## Let's get our hands dirty
+
+Let's install Kino. This can be easily achieved inside the Livebook itself by running:
+
+```elixir
+Mix.install([
+  {:kino, "~> 0.5.2"}
+])
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+:ok
+```
+
+Now let's render a `DataTable`:
+
+```elixir
+data = [
+  %{id: 1, name: "Elixir", website: "https://elixir-lang.org"},
+  %{id: 2, name: "Erlang", website: "https://www.erlang.org"}
+]
+
+Kino.DataTable.new(data)
+```
+
+## Graphics and Math
+
+Now let's discover how the integration with 
+[mermaid.js](https://mermaid-js.github.io/mermaid/#/) works:
+
+```mermaid
+gitGraph:
+options
+{
+    "nodeSpacing": 150,
+    "nodeRadius": 10
+}
+end
+commit
+branch newbranch
+checkout newbranch
+commit
+commit
+checkout master
+commit
+commit
+merge newbranch
+```
+
+Coool!
+
+<!-- livebook:{"break_markdown":true} -->
+
+And now the integration with [KaTex](#):
+
+$$
+
+\sqrt(x) = y;
+
+\\ y^2 = x
+
+\\ y = \frac{x}{y}
+$$
+
+It rocks!
