@@ -1,0 +1,19 @@
+#! /bin/bash
+
+CONTAINER_NAME=elixir_livebook
+
+if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
+    echo "Container $CONTAINER_NAME already present"
+    if [ ! "$(docker ps -aq -f status=exited -f name=$CONTAINER_NAME)" ]; then
+        echo "Stopping $CONTAINER_NAME"
+        docker stop $CONTAINER_NAME
+    fi
+    echo "Removing $CONTAINER_NAME"
+    docker rm $CONTAINER_NAME
+fi
+
+echo "Starting a brand new $CONTAINER_NAME"
+docker run --name $CONTAINER_NAME \
+     -p 8080:8080 --pull always \
+     -u $(id -u):$(id -g) -v $(pwd):/data \
+     livebook/livebook:0.5.2
