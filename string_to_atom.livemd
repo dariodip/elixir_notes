@@ -1,0 +1,35 @@
+<!-- livebook:{"persist_outputs":true} -->
+
+# Converting strings to atoms safely
+
+## Converting strings to atoms safely
+
+If your elixir system accepts any outside inputs and takes any part of those outside inputs and calls `String.to_atom/1` with the input as an argument then your elixir system is subject to a denial of service attack.
+
+Malicious actors can submit input designed to dynamically create a large number of atoms until the atom limit is reached, knocking out your elixir applications.
+
+Consider using `String.to_existing_atom/1` instead. If the argument to this function cannot be converted to an existing atom then an exception will be thrown.
+
+```elixir
+String.to_existing_atom("I don't exist")
+```
+
+```elixir
+String.to_atom("I don't exist")
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+:"I don't exist"
+```
+
+```elixir
+String.to_existing_atom("I don't exist")
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+:"I don't exist"
+```
